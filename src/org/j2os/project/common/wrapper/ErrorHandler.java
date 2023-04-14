@@ -1,6 +1,7 @@
 package org.j2os.project.common.wrapper;
 
 import org.j2os.project.common.exception.RecordNotExistException;
+import org.j2os.project.common.exception.ValidationException;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -24,6 +25,10 @@ public class ErrorHandler {
         } else if (e instanceof RecordNotExistException) {
             map.put("CODE", "103");
             map.put("MSG", "Not Found Error");
+            return map;
+        } else if (e instanceof ValidationException) {
+            map.put("CODE", "104");
+            map.put("MSG", "Validation Error");
             return map;
         } else {
             map.put("CODE", "200");

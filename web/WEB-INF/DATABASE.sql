@@ -3,7 +3,8 @@ drop table person;
 
 Table dropped.
     SQL
-> create sequence person_seq start with 1 increment by 1;
+>
+create sequence person_seq start with 1 increment by 1;
 
 Sequence
 created.

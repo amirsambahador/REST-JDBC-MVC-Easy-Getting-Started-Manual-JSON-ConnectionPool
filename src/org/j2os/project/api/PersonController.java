@@ -1,5 +1,6 @@
 package org.j2os.project.api;
 
+import org.j2os.project.common.exception.ValidationException;
 import org.j2os.project.common.json.JSON;
 import org.j2os.project.common.wrapper.ErrorHandler;
 import org.j2os.project.entity.Person;
@@ -10,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+
 @Path("/person")
 public class PersonController {
     @Produces("application/json")
@@ -17,6 +19,11 @@ public class PersonController {
     @Path("/save")
     public String save(@QueryParam("name") String name, @QueryParam("family") String family, @QueryParam("salary") String salary) throws Exception {
         try {
+            if (name == null ||
+                    family == null ||
+                    name.isEmpty() ||
+                    family.isEmpty())
+                throw new ValidationException();
             return JSON.get(PersonService
                     .getInstance()
                     .save(new Person().setName(name).setFamily(family).setSalary(Long.parseLong(salary)))
