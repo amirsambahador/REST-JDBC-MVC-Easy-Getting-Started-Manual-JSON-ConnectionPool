@@ -27,11 +27,8 @@ public class PersonService {
     public PersonService asyncSave(Person person) throws Exception {
         new Thread(
                 () -> {
-                    try (PersonRepository personRepository = new PersonRepository()) {
-                        Thread.sleep(5000);
-                        person.setSalary(person.getSalary() - ((person.getSalary() * 10) / 100));
-                        personRepository.insert(person);
-                        personRepository.commit();
+                    try {
+                        save(person);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
