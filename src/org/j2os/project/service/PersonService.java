@@ -6,10 +6,10 @@ import org.j2os.project.repository.PersonRepository;
 import java.util.List;
 
 public class PersonService {
+    private static final PersonService PERSON_SERVICE = new PersonService();
+
     private PersonService() {
     }
-
-    private static final PersonService PERSON_SERVICE = new PersonService();
 
     public static PersonService getInstance() {
         return PERSON_SERVICE;

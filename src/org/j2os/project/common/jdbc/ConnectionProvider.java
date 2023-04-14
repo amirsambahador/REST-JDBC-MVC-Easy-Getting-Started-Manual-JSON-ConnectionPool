@@ -5,10 +5,8 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import java.sql.Connection;
 
 public class ConnectionProvider {
-    private ConnectionProvider(){}
     public static final int ORACLE_XE = 1;
     public static final int ORACLE_ORCL = 2;
-
     private static final BasicDataSource XE_DATA_SOURCE = new BasicDataSource();
     private static final BasicDataSource ORCL_DATA_SOURCE = new BasicDataSource();
 
@@ -26,7 +24,10 @@ public class ConnectionProvider {
         ORCL_DATA_SOURCE.setUrl("jdbc:oracle:thin:@localhost:1521/orcl");
     }
 
-    public static Connection getConnection(int dbName)throws Exception {
+    private ConnectionProvider() {
+    }
+
+    public static Connection getConnection(int dbName) throws Exception {
         switch (dbName) {
             case 1:
                 return XE_DATA_SOURCE.getConnection();

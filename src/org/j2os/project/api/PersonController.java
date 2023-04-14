@@ -25,6 +25,7 @@ public class PersonController {
             return JSON.get(ErrorHandler.getError(e));
         }
     }
+
     @Produces("application/json")
     @GET
     @Path("/asyncSave")
@@ -38,6 +39,7 @@ public class PersonController {
             return JSON.get(ErrorHandler.getError(e));
         }
     }
+
     @Produces("application/json")
     @GET
     @Path("/update")

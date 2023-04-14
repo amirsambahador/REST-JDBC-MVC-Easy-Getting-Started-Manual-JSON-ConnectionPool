@@ -59,13 +59,13 @@ public class PersonRepository implements AutoCloseable {
         }
         return personList;
     }
-    public Person selectOne(Person person)throws Exception
-    {
+
+    public Person selectOne(Person person) throws Exception {
         preparedStatement = connection.prepareStatement("select * from person where id=?");
-        preparedStatement.setLong(1,person.getId());
-        ResultSet resultSet =  preparedStatement.executeQuery();
+        preparedStatement.setLong(1, person.getId());
+        ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next())
-            return new Person(resultSet.getLong("id"),resultSet.getString("name"),resultSet.getString("family"),resultSet.getLong("salary"));
+            return new Person(resultSet.getLong("id"), resultSet.getString("name"), resultSet.getString("family"), resultSet.getLong("salary"));
         throw new RecordNotExistException();
     }
 

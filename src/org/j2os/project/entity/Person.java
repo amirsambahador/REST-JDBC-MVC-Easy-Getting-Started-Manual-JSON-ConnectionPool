@@ -6,11 +6,10 @@ public class Person implements Serializable {
     private long id;
     private String name;
     private String family;
+    private long salary;
 
     public Person() {
     }
-
-    private long salary;
 
     public Person(String name, String family, long salary) {
         this.name = name;
