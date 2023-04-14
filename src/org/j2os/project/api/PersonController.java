@@ -12,7 +12,7 @@ import javax.ws.rs.QueryParam;
 
 @Path("/person")
 public class PersonController {
-    @Produces("text/plain")
+    @Produces("application/json")
     @GET
     @Path("/save")
     public String save(@QueryParam("name") String name, @QueryParam("family") String family, @QueryParam("salary") String salary) throws Exception {
@@ -26,7 +26,7 @@ public class PersonController {
         }
     }
 
-    @Produces("text/plain")
+    @Produces("application/json")
     @GET
     @Path("/update")
     public String update(@QueryParam("id") String id, @QueryParam("name") String name, @QueryParam("family") String family, @QueryParam("salary") String salary) throws Exception {
@@ -40,7 +40,7 @@ public class PersonController {
         }
     }
 
-    @Produces("text/plain")
+    @Produces("application/json")
     @GET
     @Path("/remove")
     public String remove(@QueryParam("id") String id) throws Exception {
@@ -54,7 +54,7 @@ public class PersonController {
         }
     }
 
-    @Produces("text/plain")
+    @Produces("application/json")
     @GET
     @Path("/findAll")
     public String findAll() throws Exception {
@@ -67,7 +67,7 @@ public class PersonController {
         }
     }
 
-    @Produces("text/plain")
+    @Produces("application/json")
     @GET
     @Path("/findOne")
     public String findOne(@QueryParam("id") String id) throws Exception {
