@@ -8,11 +8,13 @@ import java.util.List;
 public class PersonService {
     private PersonService() {
     }
+
     private static final PersonService PERSON_SERVICE = new PersonService();
 
     public static PersonService getInstance() {
         return PERSON_SERVICE;
     }
+
     public PersonService save(Person person) throws Exception {
         try (PersonRepository personRepository = new PersonRepository()) {
             person.setSalary(person.getSalary() - ((person.getSalary() * 10) / 100));
@@ -21,6 +23,23 @@ public class PersonService {
             return this;
         }
     }
+
+    public PersonService asyncSave(Person person) throws Exception {
+        new Thread(
+                () -> {
+                    try (PersonRepository personRepository = new PersonRepository()) {
+                        Thread.sleep(5000);
+                        person.setSalary(person.getSalary() - ((person.getSalary() * 10) / 100));
+                        personRepository.insert(person);
+                        personRepository.commit();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+        ).start();
+        return this;
+    }
+
     public PersonService update(Person person) throws Exception {
         try (PersonRepository personRepository = new PersonRepository()) {
             personRepository.update(person);
@@ -28,6 +47,7 @@ public class PersonService {
             return this;
         }
     }
+
     public PersonService remove(Person person) throws Exception {
         try (PersonRepository personRepository = new PersonRepository()) {
             personRepository.delete(person);
@@ -35,13 +55,14 @@ public class PersonService {
             return this;
         }
     }
+
     public List<Person> findAll() throws Exception {
         try (PersonRepository personRepository = new PersonRepository()) {
             return personRepository.selectAll();
         }
     }
-    public Person findOne(Person person)throws Exception
-    {
+
+    public Person findOne(Person person) throws Exception {
         try (PersonRepository personRepository = new PersonRepository()) {
             return personRepository.selectOne(person);
         }
