@@ -19,10 +19,7 @@ public class PersonController {
     @Path("/save")
     public String save(@QueryParam("name") String name, @QueryParam("family") String family, @QueryParam("salary") String salary) throws Exception {
         try {
-            if (name == null ||
-                    family == null ||
-                    name.isEmpty() ||
-                    family.isEmpty())
+            if (name == null || family == null || name.isEmpty() || family.isEmpty())
                 throw new ValidationException();
             return JSON.get(PersonService
                     .getInstance()
