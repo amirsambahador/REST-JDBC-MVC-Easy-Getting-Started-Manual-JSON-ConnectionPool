@@ -25,7 +25,19 @@ public class PersonController {
             return JSON.get(ErrorHandler.getError(e));
         }
     }
-
+    @Produces("application/json")
+    @GET
+    @Path("/asyncSave")
+    public String asyncSave(@QueryParam("name") String name, @QueryParam("family") String family, @QueryParam("salary") String salary) throws Exception {
+        try {
+            return JSON.get(PersonService
+                    .getInstance()
+                    .asyncSave(new Person().setName(name).setFamily(family).setSalary(Long.parseLong(salary)))
+                    .findAll());
+        } catch (Exception e) {
+            return JSON.get(ErrorHandler.getError(e));
+        }
+    }
     @Produces("application/json")
     @GET
     @Path("/update")
